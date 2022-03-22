@@ -57,21 +57,21 @@
               <a href="#">담기</a>
             </div>
           </div>
-          <div class="menu">
+          <div id="soldout" class="menu" onclick="doSoldout()">
             <img src="image/img_con06.jpg" />
             <div class="menu-info">
               <h6>참다랑어 스페셜 세트</h6>
               <p>숙성 : <span>5일 숙성</span></p>
-              <p>가격 : <span>32,000</span></p>
+              <p id="price">가격 : <span>32,000</span></p>
               <a href="#" style="color: red">품절</a>
             </div>
           </div>
         </div>
       </div>
       <div class="footer">
-        <div class="order">
-          <button type="button">결제하기</button>
-          <p>총 주문 금액 : <span>0</span></p>
+        <div id="order" class="order">
+          <button id="payment" type="button" onclick="doPayment()">결제하기</button>
+          <p >총 주문 금액 : <span id="total">0</span></p>
         </div>
       </div>
     </div>
@@ -81,34 +81,53 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      // 1번 문제: 전체 메뉴, 오늘의 메뉴, 베스트 메뉴를 클릭하게 되면
+ 
+      function doClickMenu(val){
+        // 1번 문제: 전체 메뉴, 오늘의 메뉴, 베스트 메뉴를 클릭하게 되면
       // 클릭한 메뉴에 아래 css를 적용할 것
       // background-color: #ffffff;
       // color: #4e4e4e;
+<<<<<<< HEAD
       function doClickMenu(val){
           $('#menu').children()[1].css({'background-color': '#ffffff', 'color': '#4e4e4e'})
+=======
+          $('#menu').children(1).css({'background-color': '#ffffff', 'color': '#4e4e4e'})
+>>>>>>> 73e74c228c62a56e3f36868952ca91002fe9f784
           $('#menu').children(2).css({'background-color': '#ffffff', 'color': '#4e4e4e'})
           $('#menu').children(3).css({'background-color': '#ffffff', 'color': '#4e4e4e'})
         }
       
     
+
+        function doPayment(){
+         var total = $('#total').text();
+          if(total === '0'){
+          alert("메뉴를 선택하세요!");
+          }
+        }
+        
+         // 3번 문제: 결제하기를 눌렀을 때 총 주문 금액이 0원 이면 
+      // '메뉴를 선택하세요!'라는 alert창 띄우기
+          
+      
+        function doSoldout(){
+      // 5번 문제: 참다랑어 세트를 클릭하면 
+      // '죄송합니다. 참다랑어 세트는 품절입니다.'라는 alert창 띄우기
+         alert('죄송합니다. 참다랑어 세트는 품절입니다.');
+        }
+
+
+
+
       //소스 구현
       /*
-      1번 문제: 전체 메뉴, 오늘의 메뉴, 베스트 메뉴를 클릭하게 되면
-      클릭한 메뉴에 아래 css를 적용할 것
-      background-color: #ffffff;
-      color: #4e4e4e;
+    
 
       2번 문제: 메뉴 담기를 클릭하면 총 주문 금액에 가격 표기할 것
       단, 참다랑어 세트는 품절이기 때문에 총 주문 금액에 포함될 수 없다.
 
-      3번 문제: 결제하기를 눌렀을 때 총 주문 금액이 0원 이면 
-      '메뉴를 선택하세요!'라는 alert창 띄우기
 
       4번 문제: 총 주문 금액은 10만원을 넘을 수 없다.
-
-      5번 문제: 참다랑어 세트를 클릭하면 
-      '죄송합니다. 참다랑어 세트는 품절입니다.'라는 alert창 띄우기
 
       6번 문제: 모든 조건을 만족하면 
       '주문한 참치는 참다랑어 뱃살 8일 숙성 2개, 참다랑어 등살 3일 숙성1개 입니다.
