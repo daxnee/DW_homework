@@ -72,7 +72,7 @@
       <div class="footer">
         <div id="order" class="order">
           <button id="payment" type="button" onclick="CheckOrder()">결제하기</button>
-          <p>총 주문 금액 : <span id="total">0</span></p>
+          <p>총 주문 금액 : <span id="totalPrice">0</span></p>
         </div>
       </div>
     </div>
@@ -104,65 +104,55 @@
       // 단, 참다랑어 세트는 품절이기 때문에 총 주문 금액에 포함될 수 없다. (0원으로 설정)
       // 4번 문제: 총 주문 금액은 10만원을 넘을 수 없다.
       // function checkPrice(){
-        var saveTotalPrice = $('#total').text().replace(',','');
-        saveTotalPrice = parseInt(saveTotalPrice);
-        var pricefirst = $('#price-1').text().replace(',','');
-        pricefirst = parseInt(pricefirst);
-        var priceSecond = $('#price-2').text().replace(',','');
-        priceSecond = parseInt(priceSecond);
-        var priceThird = $('#price-3').text().replace(',','');
-        priceThird = parseInt(pricefirst);
-        var price4th = $('#price-4').text().replace(',','');
-        price4th = parseInt(price4th);
-        // var price5th = $('#price-5').text().replace(',','');
-        // price5th = parseInt(price5th);
-        
-        var totalBill = 0;
-        var array = new Array();
-        array.push(pricefirst);
-        array.push(priceSecond);
-        array.push(priceThird);
-        array.push(price4th);
-
-        // for(var i=0; i<array.length; i++){
-        //   if(array[i]){
-           
-        // }
-
-      
-
-        $('#cart-0').on('click', function(){
-            if(true){
-             $('#total').text(pricefirst);
-            }
-        });
-
-        
-
-          $('#cart-1').on('click', function(){
-            if(true){
-            $('#total').text(priceSecond);
-              
-            }
-          });
-            
-            $('#cart-2').on('click', function(){
-            if(true){
-              $('#total').text(priceThird);
+        var sum = 0;
+        var firstPrice = 0;
+        $('#cart-0').click(function(){
+            var firstPrice = $('#price-1').text().replace(',','');
+            firstPrice = parseInt(firstPrice);
+          $('#totalPrice').html((sum += firstPrice));
+         if(sum > 100000){
+           alert('총 금액은 10만원을 넘을 수 없습니다.')
+           return false;
+         }
           }
-          });
-
-            $('#cart-3').on('click', function(){
-            if(true){
-              $('#total').text(price4th);
-            
-            } 
+           );
 
           
-          });
-          // 플로우차트: 개별로 준 id들을 정수형으로 변환, 콤마 리플레이스 ,(메소드 체이닝) 
-          // 배열로 호출 or 개별 id들을 sum하기 
-       
+        $('#cart-1').click(function(){
+            var secondPrice = $('#price-2').text().replace(',','');
+            secondPrice = parseInt(secondPrice);
+          $('#totalPrice').html((sum += secondPrice));
+         if(sum > 100000){
+           alert('총 금액은 10만원을 넘을 수 없습니다.')
+           return false;
+         }
+          }
+           );
+
+         
+        $('#cart-2').click(function(){
+            var thirdPrice = $('#price-3').text().replace(',','');
+            thirdPrice = parseInt(thirdPrice);
+          $('#totalPrice').html((sum += thirdPrice));
+         if(sum > 100000){
+           alert('총 금액은 10만원을 넘을 수 없습니다.')
+           return false;
+         }
+          }
+           );
+
+           
+        $('#cart-3').click(function(){
+            var lastprice = $('#price-4').text().replace(',','');
+            lastprice = parseInt(lastprice);
+          $('#totalPrice').html((sum += lastprice));
+         if(sum > 100000){
+           alert('총 금액은 10만원을 넘을 수 없습니다.')
+           return false;
+         }
+          }
+           );
+
         
       function CheckOrder(){
         // 3번 문제: 결제하기를 눌렀을 때 총 주문 금액이 0원 이면 
@@ -173,17 +163,17 @@
           return false;
           }
 
-          var len = $('.menu-info').children().length;
+          // var len = $('.menu-info').children().length;
      
-          var menu = '';
-          for(var i=0; i<len; i++){
-            if(i==len-1){
-              menu += $('.menu-info h6')[i].innerHTML;
-              break;
-            }
-            menu += $('.menu-info h6')[i].innerHTML + ', ';
-          }
-          confirm('주문한 참치는' + menu + ', '+ len + '개 주문하시겠습니까?' )
+          // var menu = '';
+          // for(var i=0; i<len; i++){
+          //   if(i==len-1){
+          //     menu += $('.menu-info h6')[i].innerHTML;
+          //     break;
+          //   }
+          //   menu += $('.menu-info h6')[i].innerHTML + ', ';
+          // }
+          // confirm('주문한 참치는' + menu + ', '+ len + '개 주문하시겠습니까?' )
           
         }
 
