@@ -90,11 +90,14 @@
       // color: #4e4e4e;
 
       function doClickMenu(val){
-        $('.nav ul li').on('click', function(){
+        $('.nav ul li').on('click', function(e){
+          console.log(e);
           $(val).css('backgroundColor','#ffffff').css('color','#4e4e4e');
-        $('.nav ul li').not(val).css('backgroundColor', '#c24040').css('color','white');
-        //  not(val) = 적용 안함
-      });
+          $('.nav ul li').not(val).css('backgroundColor', '#c24040').css('color','white');
+          //  not(val) = 적용 안함
+          // target 사용해서 풀어도 됨 
+          // target : 내가 클릭한 태그의 정보
+          });
         }
       
       //   2번 문제: 메뉴 담기를 클릭하면 총 주문 금액에 가격 표기할 것 
@@ -126,8 +129,7 @@
            
         // }
 
-        $('#cart-0').on('click', function(event){});
-          console.log(e)
+      
 
         $('#cart-0').on('click', function(){
             if(true){
