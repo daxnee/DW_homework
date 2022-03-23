@@ -113,16 +113,34 @@
         price4th = parseInt(price4th);
         // var price5th = $('#price-5').text().replace(',','');
         // price5th = parseInt(price5th);
+        
+        var totalBill = 0;
+        var array = new Array();
+        array.push(pricefirst);
+        array.push(priceSecond);
+        array.push(priceThird);
+        array.push(price4th);
+
+        // for(var i=0; i<array.length; i++){
+        //   if(array[i]){
+           
+        // }
+
+        $('#cart-0').on('click', function(event){});
+          console.log(e)
 
         $('#cart-0').on('click', function(){
             if(true){
-              $('#total').text(pricefirst);
+             $('#total').text(pricefirst);
             }
         });
 
+        
+
           $('#cart-1').on('click', function(){
             if(true){
-              $('#total').text(priceSecond);
+            $('#total').text(priceSecond);
+              
             }
           });
             
@@ -135,13 +153,15 @@
             $('#cart-3').on('click', function(){
             if(true){
               $('#total').text(price4th);
-            }
+            
+            } 
+
+          
           });
           // 플로우차트: 개별로 준 id들을 정수형으로 변환, 콤마 리플레이스 ,(메소드 체이닝) 
           // 배열로 호출 or 개별 id들을 sum하기 
-   
-
-
+       
+        
       function CheckOrder(){
         // 3번 문제: 결제하기를 눌렀을 때 총 주문 금액이 0원 이면 
       // '메뉴를 선택하세요!'라는 alert창 띄우기
@@ -162,12 +182,12 @@
             menu += $('.menu-info h6')[i].innerHTML + ', ';
           }
           confirm('주문한 참치는' + menu + ', '+ len + '개 주문하시겠습니까?' )
-      
+          
         }
 
 
          
-        
+    
       
         function doSoldout(){
       // 5번 문제: 참다랑어 세트를 클릭하면 

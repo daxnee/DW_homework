@@ -12,18 +12,18 @@
       <h1>로그인</h1>
       <div class="login-form">
         <div class="txt-field">
-          <input type="text" required />
+          <input type="text" required id="userId" />
           <label>아이디</label>
         </div>
         <div class="txt-field">
-          <input type="password" required />
+          <input type="password" required id="password"/>
           <label>비밀번호</label>
         </div>
         <div class="pass">
           <label for="login-status">로그인 상태 유지</label>
-          <input type="checkbox" id="login-status" value="stay" />
+          <input type="checkbox" id="login-status" value="stay" onclick="infoCheck()"/>
         </div>
-        <input class="login-btn" type="butten" value="로그인" />
+        <input class="login-btn" type="butten" value="로그인" onclick="logincheck()"/>
         <div class="signup-link">회원이 아닌가요? <a href="#">회원가입</a></div>
       </div>
     </div>
@@ -32,21 +32,60 @@
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
+
+
+
+    
     <script>
-      //로직 구현
-      /* 
-        1번 문제: 아이디와 비밀번호를 입력해야 로그인버튼을 눌렀을 때 
-         '로그인 완료'라는 alert창 띄우기
+           // 4번 문제: 아이디에 대문자를 입력하면 소문자로 변환해야 한다.
+           // 2번 문제: 아이디와 비밀번호에 공백을 제거 해야한다.
+           // 3번 문제: 아이디와 비밀번호는 30글자로 제한한다.
+           // 1번 문제: 아이디와 비밀번호를 입력해야 로그인버튼을 눌렀을 때 '로그인 완료'라는 alert창 띄우기
+        function logincheck(){
+        var userId = $('#userId').val().trim();
+        userId=userId.toLowerCase();
+        $('.login-btn').prop('readonly', true); // 로그인버튼 키 입력 방지
+  
+        var password = $('#password').val().trim();
+        if(userId == '' || password == ''){
+          alert("아이디 또는 비밀번호를 입력하세요 (ง •̀_•́)ง")
+          return false;
+        }
         
-        2번 문제: 아이디와 비밀번호에 공백을 제거 해야한다.
+        if (userId.length > 30 || password.length > 30) {
+          alert("아이디 또는 비밀번호는 30글자 이하로 설정하세요 ( •̄ _ •̄ ;;) ")
+          return false;
+        }else{
+          alert('로그인 완료! ◠‿◠');
+        }
+      }
+      // 5번 문제: 로그인 상태 유지를 누르면 
+      // '해당 브라우저에 로그인 정보를 저장하시겠습니까?' 라는 confirm창 띄우기
+        
+      //방법1
+        function infoCheck(){
+        var check =  $('#login-status').is(':checked');
+        if(check){
+        confirm('해당 브라우저에 로그인 정보를 저장하시겠습니까? (☉_☉)?')
+      }
+      };
 
-        3번 문제: 아이디와 비밀번호는 30글자로 제한한다.
+      //방법2
+      //   function infoCheck(){
+      //     var check =  $('#login-status').is('checked');
+      //   if(true){
+      //     confirm('해당 브라우저에 로그인 정보를 저장하시겠습니까?')
+      //   }
+      // };
+        
+        
+       
 
-        4번 문제: 아이디에 대문자를 입력하면 소문자로 변환해야 한다.
+     
 
-        5번 문제: 로그인 상태 유지를 누르면 
-        '해당 브라우저에 로그인 정보를 저장하시겠습니까?' 라는 confirm창 띄우기
-        */
+        
+
+        
     </script>
   </body>
 </html>

@@ -48,7 +48,8 @@ body {
     color: #2691d9;
     transition: 0.5s;
     font-size: 13px;
-  }
+  } 
+  /* hover 처럼 클릭하면 위 기능으로 움직임 */
   
   .txt-field label {
     position: absolute;
