@@ -19,12 +19,12 @@
           </ul>
         </div>
       </div>
-      <div class="section">
+      <div class="sect1ion">
         <div class="menu-wrapper">
           <div class="menu">
             <img src="image/img_con01.jpg" />
             <div class="menu-info">
-              <h6 >참다랑어 뱃살</h6>
+              <h6 id="cham8">참다랑어 뱃살</h6>
               <p>숙성 : <span>8일 숙성</span></p>
               <p>가격 : <span id="price-1">22,000</span></p>
               <a id="cart-0" href="#">담기</a>
@@ -34,7 +34,7 @@
           <div class="menu">
             <img src="image/img_con02.jpg" />
             <div class="menu-info">
-              <h6>참다랑어 뱃살</h6>
+              <h6 id="cham2">참다랑어 뱃살</h6>
               <p>숙성 : <span>2일 숙성</span></p>
               <p>가격 : <span id="price-2">10,000</span></p>
               <a id="cart-1" href="#">담기</a>
@@ -43,7 +43,7 @@
           <div class="menu">
             <img src="image/img_con03.jpg" />
             <div class="menu-info">
-              <h6>참다랑어 등살</h6>
+              <h6 id="cham3">참다랑어 등살</h6>
               <p>숙성 : <span>3일 숙성</span></p>
               <p>가격 : <span id="price-3">12,000</span></p>
               <a id="cart-2" href="#">담기</a>
@@ -52,7 +52,7 @@
           <div class="menu">
             <img src="image/img_con04.jpg" />
             <div class="menu-info">
-              <h6>참다랑어 뱃살</h6>
+              <h6 id="cham5">참다랑어 뱃살</h6>
               <p>숙성 : <span>5일 숙성</span></p>
               <p>가격 : <span id="price-4">16,000</span></p>
               <a id="cart-3" href="#">담기</a>
@@ -71,7 +71,7 @@
       </div>
       <div class="footer">
         <div id="order" class="order">
-          <button id="payment" type="button" onclick="CheckOrder()">결제하기</button>
+          <button id="payment" type="button">결제하기</button>
           <p>총 주문 금액 : <span id="totalPrice">0</span></p>
         </div>
       </div>
@@ -93,8 +93,9 @@
         $('.nav ul li').on('click', function(e){
           console.log(e);
           $(val).css('backgroundColor','#ffffff').css('color','#4e4e4e');
+          // 클릭하면 css 변경
           $('.nav ul li').not(val).css('backgroundColor', '#c24040').css('color','white');
-          //  not(val) = 적용 안함
+          //  선택한 값 제외한 나머지는 not(val) = 적용 안함
           // target 사용해서 풀어도 됨 
           // target : 내가 클릭한 태그의 정보
           });
@@ -109,10 +110,12 @@
         $('#cart-0').click(function(){
             var firstPrice = $('#price-1').text().replace(',','');
             firstPrice = parseInt(firstPrice);
+            // 문자열 정수형으로 변환
           $('#totalPrice').html((sum += firstPrice));
          if(sum > 100000){
+          $('#totalPrice').html((sum -= firstPrice)); // 총 금액 10만원 넘으면 가격 한번 빼주기
            alert('총 금액은 10만원을 넘을 수 없습니다.')
-           return false;
+           return false; 
          }
           }
            );
@@ -123,6 +126,7 @@
             secondPrice = parseInt(secondPrice);
           $('#totalPrice').html((sum += secondPrice));
          if(sum > 100000){
+          $('#totalPrice').html((sum -= firstPrice));
            alert('총 금액은 10만원을 넘을 수 없습니다.')
            return false;
          }
@@ -136,6 +140,7 @@
             thirdPrice = parseInt(thirdPrice);
           $('#totalPrice').html((sum += thirdPrice));
          if(sum > 100000){
+          $('#totalPrice').html((sum -= firstPrice));
            alert('총 금액은 10만원을 넘을 수 없습니다.')
            return false;
 
@@ -149,6 +154,7 @@
             lastprice = parseInt(lastprice);
           $('#totalPrice').html((sum += lastprice));
          if(sum > 100000){
+          $('#totalPrice').html((sum -= firstPrice));
            alert('총 금액은 10만원을 넘을 수 없습니다.')
            return false;
          }
@@ -156,7 +162,7 @@
            );
 
         
-      function CheckOrder(){
+      $('#payment').on('click',function(){
         // 3번 문제: 결제하기를 눌렀을 때 총 주문 금액이 0원 이면 
       // '메뉴를 선택하세요!'라는 alert창 띄우기
           var total = $('#total').text();
@@ -164,21 +170,25 @@
           alert("메뉴를 선택하세요!");
           return false;
           }
-
-          // var len = $('.menu-info').children().length;
-     
-          // var menu = '';
-          // for(var i=0; i<len; i++){
-          //   if(i==len-1){
-          //     menu += $('.menu-info h6')[i].innerHTML;
-          //     break;
-          //   }
-          //   menu += $('.menu-info h6')[i].innerHTML + ', ';
-          // }
-          // confirm('주문한 참치는' + menu + ', '+ len + '개 주문하시겠습니까?' )
+        
+      
+         var putMenuOnTheCart = $('.menu-wrapper').children();
+         for(i=0; i<putMenuOnTheCart.length-1; i++){
+         var child = putMenuOnTheCart.children()
+         var child = child[i].innerText;
+        //  var child = $('#'+ child[i]);
+         console.log(child)
+        //  var childValue = ('#'+child.id)
+        //  console.log(childValue)
+          
           
         }
+    });
 
+      
+      // 6번 문제: 모든 조건을 만족하면 
+      // '주문한 참치는 참다랑어 뱃살 8일 숙성 2개, 참다랑어 등살 3일 숙성1개 입니다.
+      // 주문하시겠습니까?' 라는 confirm창 띄우기
 
          
     
@@ -189,10 +199,6 @@
          alert('죄송합니다. 참다랑어 세트는 품절입니다 ㅠㅁㅠ');
         }
       
-      
-      // 6번 문제: 모든 조건을 만족하면 
-      // '주문한 참치는 참다랑어 뱃살 8일 숙성 2개, 참다랑어 등살 3일 숙성1개 입니다.
-      // 주문하시겠습니까?' 라는 confirm창 띄우기
       
     </script>
   </body>
