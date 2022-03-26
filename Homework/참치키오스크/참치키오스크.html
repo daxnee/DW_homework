@@ -172,19 +172,20 @@
           }
         
       
-         var putMenuOnTheCart = $('.menu-wrapper').children();
+         var putOnTheCart = $('.menu-wrapper').children();
+         var putMenuOnTheCart = putOnTheCart.children();
          for(i=0; i<putMenuOnTheCart.length-1; i++){
-         var child = putMenuOnTheCart.children()
-         var child = child[i].innerText;
-        //  var child = $('#'+ child[i]);
-         console.log(child)
-        //  var childValue = ('#'+child.id)
-        //  console.log(childValue)
+           console.log(put)
+        //  var child = putMenuOnTheCart.children()
+
+        //  var child = child[i].innerText;
+        //  console.log(child)
+        
           
           
         }
     });
-
+    
       
       // 6번 문제: 모든 조건을 만족하면 
       // '주문한 참치는 참다랑어 뱃살 8일 숙성 2개, 참다랑어 등살 3일 숙성1개 입니다.
