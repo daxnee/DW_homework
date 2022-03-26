@@ -171,20 +171,16 @@
           return false;
           }
         
-      
+      var checkMenuList = '';
          var putOnTheCart = $('.menu-wrapper').children();
-         var putMenuOnTheCart = putOnTheCart.children();
-         for(i=0; i<putMenuOnTheCart.length-1; i++){
-           console.log(put)
-        //  var child = putMenuOnTheCart.children()
-
-        //  var child = child[i].innerText;
-        //  console.log(child)
-        
-          
+         console.log(putOnTheCart)
+          for(i=0; i<putOnTheCart.length-1; i++){
+          var putOnTheCartId = putOnTheCart[i].innerText
+          checkMenuList += putOnTheCartId
           
         }
-    });
+        confirm("주문한 참치는 " +checkMenuList + "입니다");
+    }); // 어떻게 하는건데 ㅠ
     
       
       // 6번 문제: 모든 조건을 만족하면 
