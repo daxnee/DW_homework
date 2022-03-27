@@ -5,3 +5,6 @@ let count = 0; //총 몇회전 했는지 알아내는 변수
 
 console.log(array);
 console.log(count);
+
+
+// https://gmlwjd9405.github.io/2018/05/06/algorithm-bubble-sort.html
