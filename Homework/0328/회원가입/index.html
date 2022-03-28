@@ -11,10 +11,10 @@
     <div class="container">
       <div class="form-wrapper">
         <h3>스똬벅스 회원가입</h3>
-        <input type="" placeholder="회원이름을 입력해주세요..." />
-        <input type="" placeholder="사용할 닉네임을 입력해주세요..." />
+        <input id="name" type="" placeholder="회원이름을 입력해주세요..." />
+        <input id="nickname" type="" placeholder="사용할 닉네임을 입력해주세요..." />
         <div class="email-box">
-          <input type="text" placeholder="이메일을 입력해주세요..." />
+          <input id="email" type="text" placeholder="이메일을 입력해주세요..." />
           <span>@</span>
           <select id="emailList">
             <option value="none" selected>직접입력</option>
@@ -33,7 +33,7 @@
           <input type="checkbox" />
         </div>
         <div class="join-btn">
-          <button type="button">회원 가입</button>
+          <button id="btn" type="button">회원 가입</button>
         </div>
       </div>
     </div>
@@ -43,18 +43,47 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      /* 문제 1. 
-        회원가입 버튼 눌렀을 때, 빈칸 혹은 체크하지 못한 부분이 있다면
-        '내용을 확인해주세요!'하는 alert을 보여주고 focus 하시오. on click
-        문제 2.
-        연락처에 '-'를 작성하면 회원가입 버튼을 눌렀을 때 제거하시오. split
-        ex) 010-4097-0823 -> 01040970823
-        문제 3.
-        회원이름과 닉네임은 20글자 이하고 한글만 사용할 수 있습니다. if문 실행
-        문제 4.  
-        모든 조건을 만족하고 회원가입 버튼을 누르면
-        input데이터를 json으로 만들어 console.log에 출력하시오. 
-      */
+      // 문제 1. 
+      //   회원가입 버튼 눌렀을 때, 빈칸 혹은 체크하지 못한 부분이 있다면
+      //   '내용을 확인해주세요!'하는 alert을 보여주고 focus 하시오. on click
+      var signUpValue = '';
+      $('#btn').on('click', function(){
+        var inputBox = $('.form-wrapper input')
+        // console.log(inputBox)
+          for(var i=0; i<inputBox.length; i++){
+           signUpValue = $('#'+inputBox[i].id).val();
+           signUpValue = signUpValue.trim();
+          // console.log(signUpValue)
+          if(signUpValue === ''){
+           alert('내용을 확인해주세요!')
+           $('#'+inputBox[i].id).focus();
+            return false;
+          }
+          // 문제 2.
+          // 연락처에 '-'를 작성하면 회원가입 버튼을 눌렀을 때 제거하시오. split
+          // ex) 010-4097-0823 -> 01040970823
+          // if (true) {
+          //   signUpValue = signUpValue.replace('-','')
+          // }
+          
+          // 문제 3.
+          // 회원이름과 닉네임은 20글자 이하고 한글만 사용할 수 있습니다. if문 실행
+          // if(inputBox[0].id >= 20  && inputBox[1].id >= 20 ){
+          //   alert('회원이름과 닉네임은 20글자 이하로 입력해주세요!')
+          // }
+         
+        }
+
+      });
+
+        function inputText() {
+          $('#'+inputBox[i].id).val() 
+        }
+
+        // 문제 4.  
+        // 모든 조건을 만족하고 회원가입 버튼을 누르면
+        // input데이터를 json으로 만들어 console.log에 출력하시오. 
+  
     </script>
   </body>
 </html>
