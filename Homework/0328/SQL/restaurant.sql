@@ -19,6 +19,8 @@ SELECT * FROM restaurant WHERE foodNo = 30 AND restaurantName= '빠스타스';
 가장 먼저해야하는 바람직한 행동은?
 답안 작성 => 인덱스 설정 (https://sagittariusof85s.tistory.com/115)
 */
+ALTER TABLE 테이블명 ADD INDEX 인덱스명 (칼럼명1, 칼럼명2)
+ALTER TABLE restaurant ADD INDEX restaurant_test (foodNo, restaurantName)
 
 DELETE FROM food
 WHERE foodNo = 30;
@@ -27,4 +29,9 @@ WHERE foodNo = 30;
 하지만 레스토랑 테이블에 30번 데이터가 있어서 지울 수가 없다. 
 음식 테이블에 30번 데이터를 지울 방법은 무엇일까?
 답안 작성 => 참조키 설정시 on delete cascade 설정
-*/
+*/  
+ALTER TABLE restaurant DROP FOREIGN KEY foodNo;
+--  기존 fk 삭제
+ALTER TABLE restaurant ADD CONSTRAINT foodNo FOREIGN KEY(foodNo) REFERENCES food(foodNo) ON DELETE CASCADE;
+-- 제약 사항 추가
+--  
