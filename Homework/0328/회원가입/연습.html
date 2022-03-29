@@ -49,25 +49,28 @@
       // var signUpValue = '';
       $('#join').on('click', function(){
           var jsonParam = {};
-          
-
+        
         var formWrapper  =  $('.form-wrapper').children();
         for(var i=1; i<formWrapper.length; i++){
             var  elementID = formWrapper[i].id; // json으로 만들예정
             if(formWrapper[i].nodename === 'INPUT') {
-                var elementValue = $('#' + elementID).val(); // json에 nodename 
+                var elementValue = $('#' + elementID).val().trim(); // json에 nodename 
                 if(elementValue === ''){
                     alert('내용을 확인해주세요!')
                     $('#'+ elementID).focus();
                     return false;
                 }
                 if((formWrapper[i].id === 'userName' || formWrapper[i].id === 'nickName') && elementValue.length >=20){
-                    alert('20글자 제한')
+                     //  and가 먼저 실행되니까 앞의 or을 괄호로 묶어줘야 함.
+                  alert('20글자 제한')
                     return false;
                 
                 }
                 if(formWrapper[i].id === 'userName' || formWrapper[i].id === 'nickName' ){
-                    //정규표현식 한글 로직 추가
+                    // 한글 정규식
+                    if(elementValue === !onlyKorName(name)){
+                      alert('한글로만 입력이 가능합니다!')
+                    }
                     return false;
                 
                 }
@@ -77,11 +80,22 @@
 
                 }   
                 
-                var email = $('#email')
+                var email = $('#email').val().trim();
+                if(email === ''){
+                  alert('내용을 확인해주세요')
+                  $('#email').focus();
+                }
+                var emailCompany = $('#emailList option:selected').val();
+                if(emailCompany === 'none'){
+                  alert('내용을 확인해주세요');
+                  $('#emailList').focus();
+                  return false;
+                }
 
 
                 jsonParam.email = email + '@' + emailCompany;
                 doJoin(jsonParam);
+                console.log(jsonParam)
             }
         }
       });
@@ -97,9 +111,9 @@
          return isName;
        };
 
-       function onlyNumber(phone2){
+       function onlyNumber(phone){
          var regonlyNum = /^[0-9]/g;
-         var isPhone = regonlyNum.test(phone2)
+         var isPhone = regonlyNum.test(phone)
          return isPhone;
        }
       
