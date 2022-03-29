@@ -67,17 +67,19 @@
                 
                 }
                 if(formWrapper[i].id === 'userName' || formWrapper[i].id === 'nickName' ){
-                    alert('20글자 제한')
+                    //정규표현식 한글 로직 추가
                     return false;
                 
                 }
                 if(formWrapper[i].id === 'phone') {
-                    alert('20글자 제한')
-                    return false; 
+                   elementValue = elementValue.replace('-','');
+                    return false;
 
-                var email    
+                }   
                 
-                }
+                var email = $('#email')
+
+
                 jsonParam.email = email + '@' + emailCompany;
                 doJoin(jsonParam);
             }
@@ -88,6 +90,19 @@
           console.log(param); // json 출력
       }
        
+
+      function onlyKorName(name){
+          var regonlyNum = /^[가-힣]+$/;
+          var isName = regonlyNum.test(name);
+         return isName;
+       };
+
+       function onlyNumber(phone2){
+         var regonlyNum = /^[0-9]/g;
+         var isPhone = regonlyNum.test(phone2)
+         return isPhone;
+       }
+      
           
       
   
