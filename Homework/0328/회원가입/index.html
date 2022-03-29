@@ -11,8 +11,9 @@
     <div class="container">
       <div class="form-wrapper">
         <h3>스똬벅스 회원가입</h3>
-        <input id="name" type="" placeholder="회원이름을 입력해주세요..." />
-        <input id="nickname" type="" placeholder="사용할 닉네임을 입력해주세요..." />
+        <input id="name" type="" placeholder="회원이름을 입력해주세요..."  />
+        <input id="nickname" type="" placeholder="사용할 닉네임을 입력해주세요..."  />
+        
         <div class="email-box">
           <input id="email" type="text" placeholder="이메일을 입력해주세요..." />
           <span>@</span>
@@ -24,8 +25,7 @@
             <option value="nate">nate.com</option>
           </select>
         </div>
-        <input
-          type="text"
+        <input id="phone" type="text"
           placeholder="연락처를 입력해주세요...(번호만 입력하세요)"
         />
         <div class="question-box">
@@ -46,39 +46,67 @@
       // 문제 1. 
       //   회원가입 버튼 눌렀을 때, 빈칸 혹은 체크하지 못한 부분이 있다면
       //   '내용을 확인해주세요!'하는 alert을 보여주고 focus 하시오. on click
-      var signUpValue = '';
+      // var signUpValue = '';
       $('#btn').on('click', function(){
-        var inputBox = $('.form-wrapper input')
-        // console.log(inputBox)
+        var inputBox = $('.form-wrapperinput')
+        // console.log(inputBox[2])
           for(var i=0; i<inputBox.length; i++){
-           signUpValue = $('#'+inputBox[i].id).val();
-           signUpValue = signUpValue.trim();
+           var signUpValue = $('#'+inputBox[i].id).val().trim();
+           console.log(inputBox[i].id)
+          //  signUpValue = signUpValue.trim();
           // console.log(signUpValue)
-          if(signUpValue === ''){
-           alert('내용을 확인해주세요!')
-           $('#'+inputBox[i].id).focus();
-            return false;
-          }
-          // 문제 2.
-          // 연락처에 '-'를 작성하면 회원가입 버튼을 눌렀을 때 제거하시오. split
-          // ex) 010-4097-0823 -> 01040970823
-          // if (true) {
-          //   signUpValue = signUpValue.replace('-','')
+          // if(signUpValue === ''){
+          //  alert('필수정보를 입력해주세요!')
+          //  $('#'+inputBox[i].id).focus();
+          //   return false;
           // }
           
           // 문제 3.
           // 회원이름과 닉네임은 20글자 이하고 한글만 사용할 수 있습니다. if문 실행
-          // if(inputBox[0].id >= 20  && inputBox[1].id >= 20 ){
-          //   alert('회원이름과 닉네임은 20글자 이하로 입력해주세요!')
+          var name = $('#name').val().trim();
+          // name = name.trim();
+          var nickname =  $('#nickname').val().trim();
+          var phone = $('#phone').val().trim();
+          // nickname = nickname.trim();
+          if(name.length > 20  || nickname.length > 20){
+           alert('회원이름과 닉네임은 20글자 이하로 설정해주세요!')
+            return false;
+          }
+
+          if(!onlyKorName(name)){
+            alert('이름과 닉네임은 한글로 작성해주세요!')
+            return false;
+          }
+
+          // if(onlyNumber(phone)){
+          //   $('#phone').replaceAll('-','');
           // }
-         
-        }
+          
+        } 
+        });
 
-      });
 
-        function inputText() {
-          $('#'+inputBox[i].id).val() 
-        }
+
+          // 문제 2.
+          // 연락처에 '-'를 작성하면 회원가입 버튼을 눌렀을 때 제거하시오. split
+          // ex) 010-4097-0823 -> 01040970823
+          
+        
+       function onlyKorName(name){
+          var regonlyNum = /^[가-힣]+$/;
+          var isName = regonlyNum.test(name);
+         return isName;
+       };
+
+       function onlyNumber(phone2){
+         var regonlyNum = /^[0-9]/g;
+         var isPhone = regonlyNum.test(phone2)
+         return isPhone;
+       }
+      
+          
+        
+  
           // https://life-clock-notepad.tistory.com/6
         // 문제 4.  
         // 모든 조건을 만족하고 회원가입 버튼을 누르면
