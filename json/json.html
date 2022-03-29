@@ -10,6 +10,8 @@
     <div class="forms">
     <input id="name" type="text" value="양다은">
     <input id="hobby" type="text" value="독서">
+    <input id="addr" type="text" value="대전">
+
 </div>
 </body>
 <script
@@ -21,22 +23,29 @@
     <script>
         var name = $('#name').val();
         var hobby = $('#hobby').val();
+        var addr = $('#addr').val();
         var jsonData = {};
-        jsonData.name = 'ds' // 위에서 변수로 대입한 name을 사용하는게 아님! 
-        jsonData[name] = '교사'; // name이란 대입된 변수를 사용하려면 [] 배열로 받아줘야함.
+        jsonData.name = '다은' // 위에서 변수로 대입한 name을 사용하는게 아님! 
+        jsonData[name] = '학생'; // name이란 대입된 변수를 사용하려면 [] 배열로 받아줘야함. key값이 됨
+        jsonData[addr] = '지역'
         console.log(jsonData)
 
 
         var formsChildren = $('.forms').children();
         console.log(formsChildren);
         var jsonData = {};
+
         
         for(var i=0; i<formsChildren.length; i++){
             var inputId = formsChildren[i].id;
             var inputValue = $('#'+inputId).val();
+            // console.log = > 양다은, 독서, 대전 
             jsonData[inputId] = inputValue;
+            // inputId가 jsonData key값으로 들어감~!
+            //console => {name: '양다은', hobby: '독서', addr: '대전'} 
         }
-        // console.log(jsonData)
+        console.log(jsonData)
+        
         submitServer(jsonData)
 
         function submitServer(param){
