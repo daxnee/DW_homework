@@ -48,14 +48,16 @@
       //   '내용을 확인해주세요!'하는 alert을 보여주고 focus 하시오. on click
       // var signUpValue = '';
       $('#join').on('click', function(){
-          var jsonParam = {};
+          // var jsonParam = {};
         
-        var formWrapper  =  $('.form-wrapper').children();
-        for(var i=1; i<formWrapper.length; i++){
+          var formWrapper  =  $('.form-wrapper').children();
+          for(var i=1; i<formWrapper.length; i++){
             var  elementID = formWrapper[i].id; // json으로 만들예정
-            if(formWrapper[i].nodename === 'INPUT') {
-                var elementValue = $('#' + elementID).val().trim(); // json에 nodename 
+            if(formWrapper[i].nodeName === 'INPUT') { // nodeName 대소문자 구별!
+              var elementValue = '';
+                elementValue = $('#' + elementID).val(); // json에 nodename 
                 if(elementValue === ''){
+                  console.log(elementValue)
                     alert('내용을 확인해주세요!')
                     $('#'+ elementID).focus();
                     return false;
@@ -93,9 +95,9 @@
                 }
 
 
-                jsonParam.email = email + '@' + emailCompany;
-                doJoin(jsonParam);
-                console.log(jsonParam)
+                // jsonParam.email = email + '@' + emailCompany;
+                // doJoin(jsonParam);
+                // console.log(jsonParam)
             }
         }
       });
