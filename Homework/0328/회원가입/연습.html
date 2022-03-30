@@ -55,7 +55,7 @@
             var  elementID = formWrapper[i].id; // json으로 만들예정
             if(formWrapper[i].nodeName === 'INPUT') { // nodeName 대소문자 구별!
               var elementValue = '';
-                elementValue = $('#' + elementID).val(); // json에 nodename 
+                elementValue = $('#' + elementID).val(); // json에 nodeName 으로 조건 설정
                 if(elementValue === ''){
                   console.log(elementValue)
                     alert('내용을 확인해주세요!')
@@ -68,7 +68,7 @@
                     return false;
                 
                 }
-                if(formWrapper[i].id === 'userName' || formWrapper[i].id === 'nickName' ){
+                if(formWrapper[i].id === 'NickName' || formWrapper[i].id === 'nickName' ){
                     // 한글 정규식
                     if(elementValue === !onlyKorName(name)){
                       alert('한글로만 입력이 가능합니다!')
