@@ -53,11 +53,10 @@
           var formWrapper  =  $('.form-wrapper').children();
           for(var i=1; i<formWrapper.length; i++){
             var  elementID = formWrapper[i].id; // json으로 만들예정
+            var elementValue = '';
             if(formWrapper[i].nodeName === 'INPUT') { // nodeName 대소문자 구별!
-              var elementValue = '';
                 elementValue = $('#' + elementID).val(); // json에 nodeName 으로 조건 설정
                 if(elementValue === ''){
-                  console.log(elementValue)
                     alert('내용을 확인해주세요!')
                     $('#'+ elementID).focus();
                     return false;
