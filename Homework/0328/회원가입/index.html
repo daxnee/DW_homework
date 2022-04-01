@@ -66,76 +66,64 @@
             if(inputBoxChildren[i].nodeName === 'INPUT'){
               // 각기 다른 div로 묶여 있어서 json의 nodeName으로 걸러주기!
               if(elementValue === ''){
-              alert('빈칸을 입력해주세요!')
-              $('#' + elementId).focus();
-              return false;
+                alert('빈칸을 입력해주세요!')
+                $('#' + elementId).focus();
+                return false;
               }
             }
-            if (
-            (elementId === 'name' || elementId === 'nickName') &&
-            elementValue.length >= 20
-          ) {
-            alert('이름과 닉네임은 20글자 이하로 설정해주세요!');
-            return false;
+              
+
+
+
           }
-          if (
-            (elementId === 'name' || elementId === 'nickName') &&
-            !doCheckKorName(elementValue)
-          ) {
-            alert('한글로 입력해주세요!');
-            return false;
-          }
+                });
+              //       }
+      //       if (
+      //       (elementId === 'name' || elementId === 'nickName') &&
+      //       elementValue.length >= 20
+      //     ) {
+      //       alert('이름과 닉네임은 20글자 이하로 설정해주세요!');
+      //       return false;
+      //     }
+      //     if (
+      //       (elementId === 'name' || elementId === 'nickName') &&
+      //       !doCheckKorName(elementValue)
+      //     ) {
+      //       alert('한글로 입력해주세요!');
+      //       return false;
+      //     }
 
-          if (elementId === 'phoneNumber') {
-            elementValue = elementValue.replaceAll('-', '');
-          }
-          // jsonParam[elementID] = elementValue;
-        }
-        var email = $('#email').val().trim();
-        if (email === '') {
-          alert('내용을 확인해주세요!');
-          $('#email').focus();
-          return false;
-        }
-        var emailCompany = $('#emailList option:selected').val();
-        if (emailCompany === 'none') {
-          alert('이메일 주소를 선택해주세요!');
-          $('#emailList').focus();
-          return false;
-        }
-            
-            if(!$('#checkBox').is(':checked')){
-              alert('회원가입에 동의 해주세요!');
-              return false;
-              $('#checkBox').focus();
-            }
-         
-
-      
-        });
-
-
-          // 문제 2.
-          // 연락처에 '-'를 작성하면 회원가입 버튼을 눌렀을 때 제거하시오. split
-          // ex) 010-4097-0823 -> 01040970823
-          
-        
-       function doCheckKorName(name){
-          var regonlyNum = /^[가-힣]+$/;
-          var isName = regonlyNum.test(name);
-         return isName;
-       };
-
+      //     if (elementId === 'phoneNumber') {
+      //       elementValue = elementValue.replaceAll('-', '');
+      //     }
+      //     // jsonParam[elementID] = elementValue;
+      //   }
+      //   var email = $('#email').val().trim();
+      //   if (email === '') {
+      //     alert('내용을 확인해주세요!');
+      //     $('#email').focus();
+      //     return false;
+      //   }
+      //   var emailCompany = $('#emailList option:selected').val();
+      //   if (emailCompany === 'none') {
+      //     alert('이메일 주소를 선택해주세요!');
+      //     $('#emailList').focus();
+      //     return false;
+      //   }
+      //       if(!$('#checkBox').is(':checked')){
+      //         alert('회원가입에 동의 해주세요!');
+      //         $('#checkBox').focus();
+      //         return false;
+      //       }
       
 
-          
-        
-  
-          // https://life-clock-notepad.tistory.com/6
-        // 문제 4.  
-        // 모든 조건을 만족하고 회원가입 버튼을 누르면
-        // input데이터를 json으로 만들어 console.log에 출력하시오. 
-  
+      //  function doCheckKorName(name){
+      //     var regonlyNum = /^[가-힣]+$/;
+      //     var isName = regonlyNum.test(name);
+      //    return isName;
+      //  };
+
+      
     </script>
   </body>
 </html>

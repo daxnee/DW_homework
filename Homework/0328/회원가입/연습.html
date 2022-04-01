@@ -11,11 +11,10 @@
     <div class="container">
       <div class="form-wrapper">
         <h3>스똬벅스 회원가입</h3>
-        <input id="userName" type="text" placeholder="회원이름을 입력해주세요..."  />
-        <input id="NickName" type="text" placeholder="사용할 닉네임을 입력해주세요..."  />
-        
+        <input type="" placeholder="회원이름을 입력해주세요..." />
+        <input type="" placeholder="사용할 닉네임을 입력해주세요..." />
         <div class="email-box">
-          <input id="email" type="text" placeholder="이메일을 입력해주세요..." />
+          <input type="text" placeholder="이메일을 입력해주세요..." />
           <span>@</span>
           <select id="emailList">
             <option value="none" selected>직접입력</option>
@@ -25,15 +24,16 @@
             <option value="nate">nate.com</option>
           </select>
         </div>
-        <input id="Phone" type="text"
+        <input
+          type="text"
           placeholder="연락처를 입력해주세요...(번호만 입력하세요)"
         />
         <div class="question-box">
           <span>회원가입에 동의하나요?</span>
-          <input id="isAgree" type="checkbox" />
+          <input type="checkbox" />
         </div>
         <div class="join-btn">
-          <button id="join" type="button">회원 가입</button>
+          <button id="btn" type="button">회원 가입</button>
         </div>
       </div>
     </div>
@@ -43,84 +43,39 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      // 문제 1. 
-      //   회원가입 버튼 눌렀을 때, 빈칸 혹은 체크하지 못한 부분이 있다면
-      //   '내용을 확인해주세요!'하는 alert을 보여주고 focus 하시오. on click
-      // var signUpValue = '';
-      $('#join').on('click', function(){
-          // var jsonParam = {};
-        
-          var formWrapper  =  $('.form-wrapper').children();
-          for(var i=1; i<formWrapper.length; i++){
-            var  elementID = formWrapper[i].id; // json으로 만들예정
-            var elementValue = '';
-            if(formWrapper[i].nodeName === 'INPUT') { // nodeName 대소문자 구별!
-                elementValue = $('#' + elementID).val(); // json에 nodeName 으로 조건 설정
-                if(elementValue === ''){
-                    alert('내용을 확인해주세요!')
-                    $('#'+ elementID).focus();
-                    return false;
-                }
-                if((formWrapper[i].id === 'userName' || formWrapper[i].id === 'nickName') && elementValue.length >=20){
-                     //  and가 먼저 실행되니까 앞의 or을 괄호로 묶어줘야 함.
-                  alert('20글자 제한')
-                    return false;
-                
-                }
-                if(formWrapper[i].id === 'NickName' || formWrapper[i].id === 'nickName' ){
-                    // 한글 정규식
-                    if(elementValue === !onlyKorName(name)){
-                      alert('한글로만 입력이 가능합니다!')
-                    }
-                    return false;
-                
-                }
-                if(formWrapper[i].id === 'phone') {
-                   elementValue = elementValue.replace('-','');
-                    return false;
+      $('#btn').click(function(){
+         var formWrapperChildren = $('.form-wrapper').children();
+        for(var i=0; i< formWrapperChildren.length; i++){
+          var elementId = formWrapperChildren[i].id;
+          // var elementValue = '';
+          if( formWrapperChildren[i].nodeName === 'INPUT'){
+            elementValue = $('#'+elementId).val();
+            console.log(elementValue)
 
-                }   
-                
-                var email = $('#email').val().trim();
-                if(email === ''){
-                  alert('내용을 확인해주세요')
-                  $('#email').focus();
-                }
-                var emailCompany = $('#emailList option:selected').val();
-                if(emailCompany === 'none'){
-                  alert('내용을 확인해주세요');
-                  $('#emailList').focus();
-                  return false;
-                }
-
-
-                // jsonParam.email = email + '@' + emailCompany;
-                // doJoin(jsonParam);
-                // console.log(jsonParam)
-            }
+          }
         }
+
+
+
       });
-      // 받은 json을 서버로 보내는 함수
-      function doJoin(param){
-          console.log(param); // json 출력
-      }
-       
 
-      function onlyKorName(name){
-          var regonlyNum = /^[가-힣]+$/;
-          var isName = regonlyNum.test(name);
-         return isName;
-       };
 
-       function onlyNumber(phone){
-         var regonlyNum = /^[0-9]/g;
-         var isPhone = regonlyNum.test(phone)
-         return isPhone;
-       }
-      
-          
-      
-  
+
+
+
+
+      /* 문제 1. 
+        회원가입 버튼 눌렀을 때, 빈칸 혹은 체크하지 못한 부분이 있다면
+        '내용을 확인해주세요!'하는 alert을 보여주고 focus 하시오.
+        문제 2.
+        연락처에 '-'를 작성하면 회원가입 버튼을 눌렀을 때 제거하시오.
+        ex) 010-4097-0823 -> 01040970823
+        문제 3.
+        회원이름과 닉네임은 20글자 이하고 한글만 사용할 수 있습니다.
+        문제 4. 
+        모든 조건을 만족하고 회원가입 버튼을 누르면
+        input데이터를 json으로 만들어 console.log에 출력하시오.
+      */
     </script>
   </body>
 </html>
