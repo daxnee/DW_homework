@@ -170,18 +170,26 @@
           alert("메뉴를 선택하세요!");
           return false;
           }
-      var count = 0;
-      var checkMenuList = '';
-         var putOnTheCart = $('.menu-wrapper').children();
-         console.log(putOnTheCart)
-          for(i=0; i<putOnTheCart.length-1; i++){
+     
+          var menuInfoChildren = $('.menu-info').children();
+          for(var i=0; i<menuInfoChildren.length; i++){
+         var menuId =  menuInfoChildren[i].id;
+         console.log(menuId)
+        }
+
+        
+        
+         
+        //  var itemOnTheCart
+
+
+      //     for(i=0; i<putOnTheCart.length-1; i++){
             
-            checkMenuList +=  putOnTheCart[i].innerText;
-            break;
-          }
-          c
-          ount ++;
-        confirm("주문한 참치는 " +checkMenuList +', '+ count + "개 입니다");
+      //       checkMenuList +=  putOnTheCart[i].innerText;
+      //       break;
+      //     }
+      //     count ++;
+      //   confirm("주문한 참치는 " +checkMenuList +', '+ count + "개 입니다");
       }
       ); // 어떻게 하는건데 ㅠ
     
