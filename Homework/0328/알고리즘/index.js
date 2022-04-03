@@ -23,19 +23,19 @@ var temp = 0;
 // console.log('정렬 회전 수는 : '+ count + '입니다.');
 
 
-// -------------------------------
+// ------------------------------- 
 
 // let , var 차이점
 // let은 변수이름 중복 불가s능, var는 중복 가능
 
 let len = array.length;
-for(let i=len; i>0; i--){ // outer for문
+for(let i=len; i>0; i--){ // outer for문 // 바깥 for문은 4번 돌게만 하면 되니까
     for(let j=0; j<(i-1); j++){ //inner for문
-        if(array[j]>array[j+1]){
-            let temp = array[j] // 큰 수
-            array[j] = array[j+1];
-            array[j+1] = temp;
-            ++count;
+        if(array[j]>array[j+1]){ // 1>10 
+            let temp = array[j] // 큰 수 // array[0]를 temp에 대입
+            array[j] = array[j+1];  // array[0] = array[1] 더 큰 수를 앞으로 보내고
+            array[j+1] = temp; // temp에 대입한 array[1]은 뒤로 이동
+            ++count; // if문 실행한 횟수만큼 count로 나타냄
         }
     }
 }
@@ -47,14 +47,14 @@ console.log('회전수는 : ' + count)
 
 //-----------------------
 
-
+// let array = [1, 10, 4, 3, 5];
 let isSwap = false;
 for(let i=len; i>0; i--){ // outer for문
     for(let j=0; j<(i-1); j++){ //inner for문
-        if(array[j]>array[j+1]){
-            let temp = array[j] // 큰 수
+        if(array[j]>array[j+1]){ 
+            let temp = array[j] 
             array[j] = array[j+1];
-            array[j+1] = temp;
+            array[j+1] = temp; 
             ++count;
             isSwap = true;
         }
