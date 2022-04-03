@@ -171,28 +171,27 @@
           return false;
           }
      
+
+
+          var itemOnTheCart = ''
+          var count =0;
           var menuInfoChildren = $('.menu-info').children();
           for(var i=0; i<menuInfoChildren.length; i++){
-         var menuId =  menuInfoChildren[i].id;
-         console.log(menuId)
-        }
+            // console.log(menuInfoChildren)
+           itemOnTheCart += menuInfoChildren[i].innerHTML;
+           break;
+          }
+          count ++
+          confirm('주문 내역은 ' + itemOnTheCart+ ", " +  count + '개 입니다.')
+          if(confirm){
+            alert('주문완료!')
+
+          }
+        });
 
         
         
-         
-        //  var itemOnTheCart
-
-
-      //     for(i=0; i<putOnTheCart.length-1; i++){
-            
-      //       checkMenuList +=  putOnTheCart[i].innerText;
-      //       break;
-      //     }
-      //     count ++;
-      //   confirm("주문한 참치는 " +checkMenuList +', '+ count + "개 입니다");
-      }
-      ); // 어떻게 하는건데 ㅠ
-    
+        
       
       // 6번 문제: 모든 조건을 만족하면 
       // '주문한 참치는 참다랑어 뱃살 8일 숙성 2개, 참다랑어 등살 3일 숙성1개 입니다.
