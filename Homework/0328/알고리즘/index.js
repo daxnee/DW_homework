@@ -3,7 +3,7 @@
 let array = [1, 10, 4, 3, 5];
 let count = 0; //총 몇회전 했는지 알아내는 변수
 var temp = 0;
-// for(var i = 0; i< array.length; i++){
+// for(var i = 0; i < array.length; i++){
 //     for(var j=0; j<array.length-i-1; j++){
 //         if(array[j] > array[j+1]){
 //             count = array[j];
@@ -16,8 +16,6 @@ var temp = 0;
 // for(var i=0; i<array.length; i++){
 //     console.log('[%d]',array[i]);
 // }
-
-
 
 // console.log(array);
 // console.log('정렬 회전 수는 : '+ count + '입니다.');
@@ -41,8 +39,6 @@ for(let i=len; i>0; i--){ // outer for문 // 바깥 for문은 4번 돌게만 하
 }
 console.log(array)
 console.log('회전수는 : ' + count)
-
-
 
 
 //-----------------------
