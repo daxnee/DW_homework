@@ -67,3 +67,9 @@ group by h.customer_id
 having count(h.customer_id) > 3
 ```
 7. 고객번호가 5194998인 고객 등급을 골드로 업데이트 하시오.
+```sql
+update customer set grade = '골드'
+where customer_id = 5194998
+
+
+```
