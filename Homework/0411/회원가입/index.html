@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>NAVER</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -48,18 +48,48 @@
       crossorigin="anonymous"
     ></script>
     <script>
-        /* 
-          ** 문제를 풀 때 규칙을 먼저 찾아야 합니다. **
-           1. 가입하기 버튼을 눌렀을 때 모든 input박스에 값이 있어야 함.
-            값이 없는 input에 focus하고, '필수 입력란입니다. 입력해주세요.' 라는 alert창을 보여주세요.
+      $("#btnJoin").click(function(){
+         var input = $('.ps-box').children();
+         for(var i= 0; i<input.length; i++){
+           var inputBoxId = input[i].id;
+           console.log(inputBoxId);
+            var inputBoxValue = $('#'+ inputBoxId).val();
 
-           2. 아이디는 5~20자의 영문 소문자, 숫자만 사용 가능합니다.
-            값이 다르면 '아이디는 5~20자의 영문 소문자, 숫자만 사용 가능합니다.' alert창 보여주기.
+            //   ** 문제를 풀 때 규칙을 먼저 찾아야 합니다. **
+            //    1. 가입하기 버튼을 눌렀을 때 모든 input박스에 값이 있어야 함.
+            //     값이 없는 input에 focus하고, '필수 입력란입니다. 입력해주세요.' 라는 alert창을 보여주세요.
+            if(inputBoxValue === ''){
+                alert("필수 입력란입니다. 입력해주세요!");
+                $('#'+ inputBoxId).focus();
+                return false;
+            }
+            //    2. 아이디는 5~20자의 영문 소문자, 숫자만 사용 가능합니다.
+            //     값이 다르면 '아이디는 5~20자의 영문 소문자, 숫자만 사용 가능합니다.' alert창 보여주기.
+            if(inputBoxId == 'id' && !doCheckId(inputBoxValue)){
+                alert('아이디는 5~20자의 영문 소문자, 숫자만 사용 가능합니다.')
+                return false;
+            }
             
-           3. 비밀번호와 비밀번호 재확인은 같아야 합니다.
+            //    3. 비밀번호와 비밀번호 재확인은 같아야 합니다.
+            if($('#pswd1').val() != $('#pswd2').val()){
+                alert('비밀번호를 다시 확인해주세요!')
+                return false;
+            }
+            
+            //    4. 위 조건 만족 하면 '회원가입 완료' alert창 보여주기.
+        }
+        alert('회원가입 완료!');
+      });
 
-           4. 위 조건 만족 하면 '회원가입 완료' alert창 보여주기.
-        */
+      function doCheckId(id){
+        var regId = /^[a-z0-9]{5,20}$/;
+        var isCheckId = regId.test(id);
+        return isCheckId;
+      }
+          
+            
+
+        
     </script>
 </body>
 </html>
