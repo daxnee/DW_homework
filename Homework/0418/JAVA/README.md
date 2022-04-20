@@ -57,6 +57,8 @@
         //1. 부서이름이 DEVELOP인 사원 급여를 2배 인상하시오.
         @Override
         public List<UserVO> updateSal(List<UserVO> list, String dname){
+            //list안에 UserVO라는 클래스가 또 들어있음
+		// 그러나 UserVO 안에 필드변수가 private이다. => 직접 가져오지 못하니까 get set을 이용해서 가져옴
             for(int i=0; i<list.size(); i++) {
 			String temp =list.get(i).getDname(); // list의 0번째 배열 안 get을 가져온 것임
 			if(temp.equals(dname)) {
@@ -99,6 +101,7 @@
         }
         //4. 이름이 King인 직원의 모든 정보 조회.
         @Override
+        // 리턴타입이 list가 아니라 클래스임
         public UserVO selectUserByEname(List<UserVO> list, String ename){
             for(int i=0; i<list.size(); i++) {
 			String tempEname = list.get(i).getEname();
@@ -106,14 +109,10 @@
 				return list.get(i);
 			}
 		}
-            return null;
+            return null; // 리턴 타입이 클래스라서 null이 가능.
         }
-
     }
 ```
-
-
-
 
 4. MainController 클래스 생성 (main 함수 o)
 ```java
@@ -131,7 +130,7 @@
             list.add(new UserVO("King","MASTER",0));
 
             //여기서 문제 풀 것
-                  UserServiceImple service = new UserService();
+        UserServiceImple service = new UserService();
         //1번
         list = service.updateSal(list,"DEVELOP");
         printList(list);
@@ -152,9 +151,7 @@
 			System.out.println("사원 이름 : "+vo.getEname()+", 부서 이름 : "+vo.getDname()+", 직원 급여 : "+vo.getSal()+", 직원 레벨 : "+vo.getLv());
 		}
 		System.out.println("====================================================================");
-        
       
-
         }
     }
 ```
