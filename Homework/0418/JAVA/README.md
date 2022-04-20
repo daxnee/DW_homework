@@ -16,7 +16,7 @@
             this.sal = sal;
         }
         //0. getter,setter 함수를 생성하시오. 
-        	public String getEname() {
+        public String getEname() {
 		return ename;
 	}
 
@@ -41,7 +41,7 @@
 	}
 
 	public int getLv() {
-		return lv;
+		return lv; 
 	}
 
 	public void setLv(int lv) {
@@ -52,7 +52,7 @@
 
 3. UserService 클래스 생성 (main 함수 x)
 ```java
-    public class UserService implements UserServiceImple{
+    public class UserService implements UserServiceImple{ // 샹속
 
         //1. 부서이름이 DEVELOP인 사원 급여를 2배 인상하시오.
         @Override
@@ -156,4 +156,13 @@
     }
 ```
 
+
+
+
+
+
+
+
+***     printList(list);
+    @Override 해당 클래스 이름 누르면 add뜨는데 왜 나는 안뜨지
 
