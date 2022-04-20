@@ -16,32 +16,104 @@
             this.sal = sal;
         }
         //0. getter,setter 함수를 생성하시오. 
+        	public String getEname() {
+		return ename;
+	}
+
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+
+	public String getDname() {
+		return dname;
+	}
+
+	public void setDname(String dname) {
+		this.dname = dname;
+	}
+
+	public int getSal() {
+		return sal;
+	}
+
+	public void setSal(int sal) {
+		this.sal = sal;
+	}
+
+	public int getLv() {
+		return lv;
+	}
+
+	public void setLv(int lv) {
+		this.lv = lv;
+	}
     }
 ```
 
 3. UserService 클래스 생성 (main 함수 x)
 ```java
-    public class UserService{
+    public class UserService implements UserServiceImple{
 
         //1. 부서이름이 DEVELOP인 사원 급여를 2배 인상하시오.
+        @Override
         public List<UserVO> updateSal(List<UserVO> list, String dname){
-            return null;
+            for(int i=0; i<list.size(); i++) {
+			String temp =list.get(i).getDname(); // list의 0번째 배열 안 get을 가져온 것임
+			if(temp.equals(dname)) {
+				int sal = list.get(i).getSal();
+				sal *= 2;
+				list.get(i).setSal(sal); // set을 이용해서 수정된 급여를 넣어준다.
+			}
+			System.out.println();
+		}
+            return list;
         }
         //2. 급여가 0 ~ 100 : 1 레벨, 101 ~ 1000 : 2 레벨, 1001 이상부터는 3 레벨로 수정하시오.
+        @Override
         public List<UserVO> updateLv(List<UserVO> list){
-            return null;
+            for(int i=0; i<list.size(); i++) {
+			int sal = list.get(i).getSal();
+			if(sal > 0 && sal <= 100) {
+				list.get(i).setLv(1);
+			}
+			if(sal >= 101 && sal <= 1000) {
+				list.get(i).setLv(2);
+			}
+			
+			if(sal >= 1001) {
+				list.get(i).setLv(3);
+			}
+		}
+            return list;
         }
         //3. 레벨 3이상 직원을 모두 해고하시오.
+        @Override
         public List<UserVO> deleteUser(List<UserVO> list, int lv){
-            return null;
+            for(int i=0; i<list.size(); i++) {
+		int tempLv = list.get(i).getLv();
+		if(tempLv >= lv) {
+			list.remove(i);
+			}
+		}
+            return list;
         }
         //4. 이름이 King인 직원의 모든 정보 조회.
+        @Override
         public UserVO selectUserByEname(List<UserVO> list, String ename){
+            for(int i=0; i<list.size(); i++) {
+			String tempEname = list.get(i).getEname();
+			if(ename.equals(tempEname)) {
+				return list.get(i);
+			}
+		}
             return null;
         }
 
     }
 ```
+
+
+
 
 4. MainController 클래스 생성 (main 함수 o)
 ```java
@@ -59,7 +131,32 @@
             list.add(new UserVO("King","MASTER",0));
 
             //여기서 문제 풀 것
+                  UserServiceImple service = new UserService();
+        //1번
+        list = service.updateSal(list,"DEVELOP");
+        printList(list);
+        //2번
+        list = service.updateLv(list);
+        printList(list);
+        //3번
+        list = service.deleteUser(list, 3);
+        printList(list);
+        //4번
+        UserVO vo = service.selectUserByEname(list, "King");
+        System.out.println("사원 이름 : "+vo.getEname()+", 부서 이름 : "+vo.getDname()+", 직원 급여 : "+vo.getSal()+", 직원 레벨 : "+vo.getLv());
+	}
+	//결과를 확인하는 메소드
+	public static void printList(List<UserVO> list){
+		System.out.println("====================================================================");
+		for(UserVO vo : list){
+			System.out.println("사원 이름 : "+vo.getEname()+", 부서 이름 : "+vo.getDname()+", 직원 급여 : "+vo.getSal()+", 직원 레벨 : "+vo.getLv());
+		}
+		System.out.println("====================================================================");
+        
+      
 
         }
     }
 ```
+
+
