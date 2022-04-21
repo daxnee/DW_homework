@@ -14,7 +14,7 @@ select count(car_number)
 from car_information;
 ```
 
-2. 차량에 부착된 디바이스 uuid, battery, create_at 조회.
+2. 차량에 부착된 디바이스 uuid, battery, create_at 조회. // 조인 해서 다시 
 ```sql
 select device_uuid,
 battery,
