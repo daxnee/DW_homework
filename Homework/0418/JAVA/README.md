@@ -130,7 +130,8 @@
             list.add(new UserVO("King","MASTER",0));
 
             //여기서 문제 풀 것
-        UserServiceImple service = new UserService();
+        UserServiceImple service = new UserService(); //  UserServiceImple(부모)  UserService(자식)
+        //   부모는 자식을 포함할 수 있어서 이렇게 구현이 가능함 (마치 int를 String으로 변환하는 구조와 비슷함)
         //1번
         list = service.updateSal(list,"DEVELOP");
         printList(list);
