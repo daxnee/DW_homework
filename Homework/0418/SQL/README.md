@@ -9,8 +9,24 @@
 ## 문제
 
 1. 차량 수 조회
+```sql
+select count(car_number) 
+from car_information;
+```
+
 2. 차량에 부착된 디바이스 uuid, battery, create_at 조회.
+```sql
+select device_uuid,
+battery,
+create_at
+from devices;
+
+```
 3. UUID '20130099', 배터리 100, 펌웨어 버전 '1.0.1', 사용여부 TRUE인 디바이스를 devices에 등록하시오.
+```sql
+insert into devices
+values (20130099, 100,'1.0.1', 1, now());
+```
 4. 2022-04-11 이후 탈착 이벤트가 1건 이상 발생된 UUID, 펌웨어 버전 조회.
 5. 2022-04-11 ~ 2022-04-13 일별 이벤트 카운트 조회.  
 6. 전체 디바이스 수, 차량에 부착된 디바이스 수, 차량에 부착하지 않은 디바이스 수 조회.
