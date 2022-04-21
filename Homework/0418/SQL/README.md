@@ -16,10 +16,13 @@ from car_information;
 
 2. 차량에 부착된 디바이스 uuid, battery, create_at 조회. // 조인 해서 다시 
 ```sql
-select device_uuid,
-battery,
-create_at
-from devices;
+
+select 
+d.device_uuid,
+d.battery,
+d.create_at
+from devices as d left join car_information as c
+on d.device_uuid = c.device_uuid;
 
 ```
 3. UUID '20130099', 배터리 100, 펌웨어 버전 '1.0.1', 사용여부 TRUE인 디바이스를 devices에 등록하시오.
@@ -27,8 +30,40 @@ from devices;
 insert into devices
 values (20130099, 100,'1.0.1', 1, now());
 ```
-4. 2022-04-11 이후 탈착 이벤트가 1건 이상 발생된 UUID, 펌웨어 버전 조회.
+
+
+4. 2022-04-11 이후 탈착 이벤트가 1건 이상 발생된 UUID, 펌웨어 버전 조회. *** 언폴츄널리 아돈언덜스탠드
+
+```sql
+select 
+d.device_uuid,
+d.firmware_ver 
+from car_event_log as c join devices as d
+on c.create_at = d.create_at 
+where date_format(c.create_at, '%Y%m%d') > '2022-04-11';
+
+```
 5. 2022-04-11 ~ 2022-04-13 일별 이벤트 카운트 조회.  
+```sql
+select 
+DATE_FORMAT(create_at,'%Y-%m-%d'),
+count(*) 
+from car_event_log 
+group by DATE_FORMAT(create_at,'%Y-%m-%d');
+having count(car_number);
+```
+
 6. 전체 디바이스 수, 차량에 부착된 디바이스 수, 차량에 부착하지 않은 디바이스 수 조회.
+```sql
+select 
+count(d.device_uuid) as "전체디바이스수",
+count(c.device_uuid) as "부착된 디바이스 수 ",
+c.device_uuid is null as "미부착 디바이스 수"
+from devices d left join car_information c 
+on d.device_uuid = c.device_uuid;
+
+```
 7. 차량번호 '359서 9096'의 2022-04-11 ~ 2022-04-13일까지 이벤트별 카운트 조회
+
+
 8. UUID가 '20133344'인 디바이스의 2022-04-11 ~ 2022-04-13에 발생한 이벤트타입, 이벤트 날짜, 차량번호판, 담당자 조회.
