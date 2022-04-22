@@ -64,6 +64,18 @@ on d.device_uuid = c.device_uuid;
 
 ```
 7. 차량번호 '359서 9096'의 2022-04-11 ~ 2022-04-13일까지 이벤트별 카운트 조회
+```sql
+select 
+car_number ,
+count(event_type) 
+from car_event_log 
+where car_number = '359서 9096' and DATE_FORMAT(create_at,'%Y-%m-%d') >= '2022-04-11' or
+DATE_FORMAT(create_at,'%Y-%m-%d') <= '2022-04-13'
+group by event_type 
+;
+
+```
+
 
 
 8. UUID가 '20133344'인 디바이스의 2022-04-11 ~ 2022-04-13에 발생한 이벤트타입, 이벤트 날짜, 차량번호판, 담당자 조회.
