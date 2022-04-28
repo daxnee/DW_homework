@@ -1,6 +1,7 @@
 ## 삽입 정렬(Insertion Sort)
     Insertion Sort는 Selection Sort와 유사하지만, 좀 더 효율적인 정렬 알고리즘.
     매 순서마다 해당 원소를 삽입할 수 있는 위치를 찾아 해당 위치에 넣는다.
+    
 
 
 ### 삽입 정렬(insertion sort) 과정
