@@ -6,7 +6,8 @@
 
 ### 삽입 정렬(insertion sort) 과정
 
-![](insertion-sort.png)
+![insertion-sort](https://user-images.githubusercontent.com/96815399/165678955-2a1a55c4-fed0-4cff-97c5-37451ce59713.png)
+
 
 - 1회전: 두 번째 자료인 5를 Key로 해서 그 이전의 자료들과 비교한다.  
     Key 값 5와 첫 번째 자료인 8을 비교한다. 8이 5보다 크므로 8을 5자리에 넣고 Key 값 5를 8의 자리인 첫 번째에 기억시킨다.  
