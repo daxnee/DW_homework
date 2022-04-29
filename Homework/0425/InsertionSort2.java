@@ -24,3 +24,14 @@ public class InsertionSort {
 	     }
 
 }
+
+
+
+
+
+---
+또다른 풀이
+
+
+
+
