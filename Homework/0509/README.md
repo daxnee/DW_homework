@@ -2,9 +2,20 @@
 ```java
 //문제 0. 급여 1500을 파라미터로 받고 부서가 10, 30에 속하는 사원 중 급여가 1500을 넘는 사원의 이름 및 급여 조회.
 @GetMapping("/emp/sal/{sal}")
+select
+from emp
+where sal = #{sal}
+and deptno in(10, 30)
+
 
 //문제 1. emp에서 사수가 없는 사원 조회
 @GetMapping("/emp/mgr")
+
+select
+empno,
+ename
+from emp
+where mgr is null
 
 //문제 2. 1987년도를 파리미터로 받고 해당 년도에 입사한 사원 조회 
 @GetMapping("/emp/hiredate/year/{year}")
