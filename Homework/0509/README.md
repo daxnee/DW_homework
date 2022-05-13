@@ -8,8 +8,38 @@ where sal = #{sal}
 and deptno in(10, 30)
 
 
+-- xml -- 
+
+
+-- mapper --
+
+
+-- service --
+
+
+-- controller - 
+
+
+
+
+
+
+
+
+
 //문제 1. emp에서 사수가 없는 사원 조회
 @GetMapping("/emp/mgr")
+-- xml -- 
+
+
+-- mapper --
+
+
+-- service --
+
+
+-- controller - 
+
 
 select
 empno,
@@ -20,15 +50,88 @@ where mgr is null
 //문제 2. 1987년도를 파리미터로 받고 해당 년도에 입사한 사원 조회 
 @GetMapping("/emp/hiredate/year/{year}")
 
+-- xml -- 
+
+
+-- mapper --
+
+
+-- service --
+
+
+-- controller - 
+
 //문제 3. 12월을 파라미터로 받고 해당 월에 입사한 사원 중 급여가 가장 많은 사원 조회
 // hint : 입사날짜가 12월인 사람들을 list를 담아라
 @GetMapping("/emp/hiredate/month/{month}")
 
+-- xml -- 
+
+	<select id="selectEmpMaxSal" resultType="EmpVO">
+	<!-- 문제 3. 급여가 가장 높은 사원 조회 -->
+	    select 
+      ENAME, 
+      sal 
+    from 
+      (
+        select 
+          max(sal) as maxSal 
+        from 
+          emp 
+        where 
+          date_format(HIREDATE, '%m') = #{HIREDATE}
+          ) as e, 
+      emp 
+    where 
+      sal = e.maxSal 
+      and date_format(HIREDATE, '%m') = #{HIREDATE}
+	</select>
+
+-- mapper --
+	public List<EmpVO> selectEmpMaxSal(String hiredate);
+
+
+-- service --
+public List<EmpVO> getEmpMaxSal(String hiredate){
+		return empMapper.selectEmpMaxSal(hiredate);
+	}
+
+
+-- controller - 
+
+@GetMapping("/emp/hiredate/month/{month}")
+	public List<EmpVO> callEmpMaxSal(String hiredate){
+		return empService.getEmpMaxSal(hiredate);
+	}
+
 //문제 4. MANAGER를 파라미터로 받고 job이 MANAGER 중 입사날짜가 가장 빠른 사원의 이름, 입사날짜, 급여 조회 
 @GetMapping("/emp/job/{jobName}")
 
+-- xml -- 
+
+
+-- mapper --
+
+
+-- service --
+
+
+-- controller - 
+
 //(join 문제)*문제 5. 사원번호 7782를 파라미터로 받고 해당 사원의 모든 정보(부서번호, 부서이름, 부서위치 포함) 조회
 @GetMapping("/emp/empno/{empno}")
+
+-- xml -- 
+
+
+-- mapper --
+
+
+-- service --
+
+
+-- controller - 
+
 ```
 
 ### 비즈니스

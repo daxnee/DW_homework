@@ -1,4 +1,6 @@
 --  문제 3. 급여가 가장 높은 사원 조회
+
+-- xml
 	select
 	ENAME,
 	sal 
