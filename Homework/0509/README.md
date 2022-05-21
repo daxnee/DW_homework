@@ -9,7 +9,14 @@ and deptno in(10, 30)
 
 
 -- xml -- 
-
+select
+		ENAME,
+		SAL 
+	FROM 
+		emp
+	WHERE 
+		DEPTNO in (10,30)
+		AND SAL > #{sal}
 
 -- mapper --
 
