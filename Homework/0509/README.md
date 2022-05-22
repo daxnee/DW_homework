@@ -9,7 +9,7 @@ and deptno in(10, 30)
 
 
 -- xml -- 
-select
+<select id="selectWhereSalAndDeptno" resultType="Empvo">
 		ENAME,
 		SAL 
 	FROM 
@@ -17,56 +17,94 @@ select
 	WHERE 
 		DEPTNO in (10,30)
 		AND SAL > #{sal}
+</select> 
+
 
 -- mapper --
-
+public List<EmpVO> selectWhereSalAndDeptno(int sal);
 
 -- service --
-
+public List<EmpVO> getEmpSalAndDeptno(int sal){
+		return empMapper.selectWhereSalAndDeptno(sal);
+	}
 
 -- controller - 
 
-
-
-
-
-
+@GetMapping("/emp/sal/{sal}")
+	public List<EmpVO> callEmpSalAndDeptno(@PathVariable("sal") int sal){
+		return empService.getEmpSalAndDeptno(sal);
+	}
 
 
 
 //문제 1. emp에서 사수가 없는 사원 조회
 @GetMapping("/emp/mgr")
--- xml -- 
 
+-- xml -- 
+  <select id="selectMgrNull" resultType="EmpVO">
+	 SELECT 
+		empno,
+		ename,
+		job,
+		sal
+	 FROM 
+	 	emp 
+	 WHERE 
+	 	mgr is null
+	 </select>
 
 -- mapper --
+public List<EmpVO> selectMgrNull();
 
 
 -- service --
-
+public List<EmpVO> getEmpMgr(){
+		return empMapper.selectMgrNull();
+	}
 
 -- controller - 
 
+@GetMapping("/emp/mgr")
+	public List<EmpVO> callEmpMgr(){
+		return empService.getEmpMgr();
+	}
 
-select
-empno,
-ename
-from emp
-where mgr is null
 
 //문제 2. 1987년도를 파리미터로 받고 해당 년도에 입사한 사원 조회 
 @GetMapping("/emp/hiredate/year/{year}")
 
 -- xml -- 
-
+  <select id="selectEmphiredate" resultType="EmpVO">
+	 SELECT 
+		empno,
+		ename,
+		job,
+		sal,
+		hiredate
+	 FROM 
+	 	emp
+	 WHERE 
+	 	date_format(HIREDATE, '%y') = #{HIREDATE}
+	 	
+	 </select>
 
 -- mapper --
+	public List<EmpVO> selectEmpHiredate(String hiredate);
 
 
 -- service --
-
+	public List<EmpVO> getEmphiredate(String hiredate){
+		
+		return empMapper.selectEmpHiredate(hiredate);
+	}
 
 -- controller - 
+
+@GetMapping("/emp/hiredate/year/{year}")
+	public List<EmpVO> callEmpHiredate(@PathVariable("year") String hiredate){
+		return empService.getEmphiredate(hiredate);
+	}
+
 
 //문제 3. 12월을 파라미터로 받고 해당 월에 입사한 사원 중 급여가 가장 많은 사원 조회
 // hint : 입사날짜가 12월인 사람들을 list를 담아라
@@ -129,15 +167,40 @@ public List<EmpVO> getEmpMaxSal(String hiredate){
 @GetMapping("/emp/empno/{empno}")
 
 -- xml -- 
+<select id="selectEmpAndDeptEmpno" resultType="EmpVO">
+	SELECT
+		e.EMPNO,
+		e.ENAME,
+		e.JOB,
+		e.MGR,
+		e.HIREDATE,
+		e.SAL ,
+		e.COMM,
+		e.DEPTNO,
+		d.DNAME,
+		d.LOC 
+	From 
+		emp e join dept d on e.DEPTNO = d.DEPTNO 
+		AND e.EMPNO = #{empno}
+</select>
 
 
 -- mapper --
+public EmpVO selectEmpAndDeptEmpno(int empno);	
 
 
 -- service --
+public EmpVO getEmpAndDeptEmpno(int empno) {
+		return empMapper.selectEmpAndDeptEmpno(empno);
+	}
 
 
 -- controller - 
+	
+	@GetMapping("/emp/dept/empno/{empno}")
+	public EmpVO callEmpAndDeptEmpno(@PathVariable("empno") int empno) {
+		return empService.getEmpAndDeptEmpno(empno);
+	}
 
 ```
 
