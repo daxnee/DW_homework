@@ -71,6 +71,7 @@ public List<EmpVO> getEmpMgr(){
 
 
 //문제 2. 1987년도를 파리미터로 받고 해당 년도에 입사한 사원 조회 
+// But, 1987년에 입사한 사원 수가 3명 이하면 1981년에 입사한 사원으로 조회하시오.
 @GetMapping("/emp/hiredate/year/{year}")
 
 -- xml -- 
@@ -94,7 +95,14 @@ public List<EmpVO> getEmpMgr(){
 
 -- service --
 	public List<EmpVO> getEmphiredate(String hiredate){
-		
+		int count =0;
+		for(int i=0; i<empMapper.selectEmpHiredate(hiredate).size(); i++){
+			count++;
+		}
+		if(count <= 3){
+			hiredate = 1981;
+			return empMapper.selectEmpHiredate(hiredate);
+		}
 		return empMapper.selectEmpHiredate(hiredate);
 	}
 
@@ -112,8 +120,8 @@ public List<EmpVO> getEmpMgr(){
 
 -- xml -- 
 
+-- 서브쿼리,service로직x -- 
 	<select id="selectEmpMaxSal" resultType="EmpVO">
-	<!-- 문제 3. 급여가 가장 높은 사원 조회 -->
 	    select 
       ENAME, 
       sal 
@@ -126,11 +134,25 @@ public List<EmpVO> getEmpMgr(){
         where 
           date_format(HIREDATE, '%m') = #{HIREDATE}
           ) as e, 
-      emp 
+     	 emp 
     where 
-      sal = e.maxSal 
-      and date_format(HIREDATE, '%m') = #{HIREDATE}
+		sal = e.maxSal 
+		and date_format(HIREDATE, '%m') = #{HIREDATE}
 	</select>
+
+-- service 사용 xml -- 
+<select id="selectEmpMaxSal" resultType="EmpVO">
+	SELECT 
+		ename,
+		job,
+		hiredate ,
+		sal
+	FROM 
+		emp  
+	WHRER 
+		date_format(HIREDATE, '%m')=#{month} 
+</select>
+
 
 -- mapper --
 	public List<EmpVO> selectEmpMaxSal(String hiredate);
@@ -138,8 +160,24 @@ public List<EmpVO> getEmpMgr(){
 
 -- service --
 public List<EmpVO> getEmpMaxSal(String hiredate){
-		return empMapper.selectEmpMaxSal(hiredate);
+	int max = 0;
+		List<EmpVO> list = empMapper.getHiredateMonth(month);
+		EmpVO vo = null;
+		System.out.println(list);
+		for(int i=0; i<list.size(); i++) {
+			if(max<list.get(i).getSal()){
+				max = list.get(i).getSal();
+				if(max == list.get(i).getSal()) {
+					vo = list.get(i);
+				}
+			}
+		}
+		List<EmpVO> maxSalEmpnoList = new ArrayList<EmpVO>();
+		maxSalEmpnoList.add(vo);
+		System.out.println(maxSalEmpnoList);
+		return maxSalEmpnoList;
 	}
+		
 
 
 -- controller - 
@@ -149,19 +187,36 @@ public List<EmpVO> getEmpMaxSal(String hiredate){
 		return empService.getEmpMaxSal(hiredate);
 	}
 
-//문제 4. MANAGER를 파라미터로 받고 job이 MANAGER 중 입사날짜가 가장 빠른 사원의 이름, 입사날짜, 급여 조회 
+//문제 4. MANAGER를 파라미터로 받고 job이 MANAGER 중 입사날짜가 가장 빠른 사원의 이름, 입사날짜, 급여 조회
+//service :  입사날짜 빠른 사원 조회 (쿼리 2개필요 OR 쿼리하나로 해결 가능)
 @GetMapping("/emp/job/{jobName}")
 
 -- xml -- 
-
+<select id="getJob" resultType="EmpVO">
+select 
+ename,
+job,
+HIREDATE,
+SAL 
+from emp e 
+where job = #{jobName}
+limit 1
+</select>
 
 -- mapper --
+public EmpVO selectEmpJobAndHiredate(Stirng job);
 
 
 -- service --
-
+public EmpVO getEmpJobAndHiredate(String job){
+		return empMapper.selectEmpJobAndHiredate(job);
+	}
 
 -- controller - 
+@GetMapping("/emp/job/{jobName}")
+	public EmpVO callEmpJobAndHiredate(@PathVariable("jobName")  String job){
+		return empService.getEmpJobAndHiredate(job);
+	}
 
 //(join 문제)*문제 5. 사원번호 7782를 파라미터로 받고 해당 사원의 모든 정보(부서번호, 부서이름, 부서위치 포함) 조회
 @GetMapping("/emp/empno/{empno}")
@@ -203,6 +258,10 @@ public EmpVO getEmpAndDeptEmpno(int empno) {
 	}
 
 ```
+
+
+
+
 
 ### 비즈니스
 ```java
