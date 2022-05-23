@@ -161,8 +161,8 @@ public List<EmpVO> getEmpMgr(){
 -- service --
 public List<EmpVO> getEmpMaxSal(String hiredate){
 	int max = 0;
-		List<EmpVO> list = empMapper.getHiredateMonth(month);
 		EmpVO vo = null;
+		List<EmpVO> list = empMapper.getHiredateMonth(month);
 		System.out.println(list);
 		for(int i=0; i<list.size(); i++) {
 			if(max<list.get(i).getSal()){
