@@ -140,7 +140,7 @@ public List<EmpVO> getEmpMgr(){
 		and date_format(HIREDATE, '%m') = #{HIREDATE}
 	</select>
 
--- service 사용 xml -- 
+-- service 사용 -- 
 <select id="selectEmpMaxSal" resultType="EmpVO">
 	SELECT 
 		ename,
@@ -187,6 +187,7 @@ public List<EmpVO> getEmpMaxSal(String hiredate){
 		return empService.getEmpMaxSal(hiredate);
 	}
 
+
 //문제 4. MANAGER를 파라미터로 받고 job이 MANAGER 중 입사날짜가 가장 빠른 사원의 이름, 입사날짜, 급여 조회
 //service :  입사날짜 빠른 사원 조회 (쿼리 2개필요 OR 쿼리하나로 해결 가능)
 @GetMapping("/emp/job/{jobName}")
@@ -217,6 +218,8 @@ public EmpVO getEmpJobAndHiredate(String job){
 	public EmpVO callEmpJobAndHiredate(@PathVariable("jobName")  String job){
 		return empService.getEmpJobAndHiredate(job);
 	}
+
+	
 
 //(join 문제)*문제 5. 사원번호 7782를 파라미터로 받고 해당 사원의 모든 정보(부서번호, 부서이름, 부서위치 포함) 조회
 @GetMapping("/emp/empno/{empno}")
